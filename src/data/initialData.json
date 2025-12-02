@@ -1,0 +1,290 @@
+{
+  "userProfile": {
+    "name": "Student",
+    "semester": "4th Semester",
+    "university": "Birla Institute of Technology, Mesra",
+    "goal": "Achieve 9.0 CGPA"
+  },
+  "settings": {
+    "theme": "dark"
+  },
+  "goals": [
+    { "id": "g1", "name": "End Semester Exams", "date": "2025-12-15T09:00:00.000Z", "type": "exam" },
+    { "id": "g2", "name": "Project Submission", "date": "2025-12-05T23:59:00.000Z", "type": "assignment" }
+  ],
+  "dashboard": {
+    "todaySchedule": [
+      { "id": "1", "subject": "CS24215", "time": "09:00 AM", "room": "LH-201", "type": "Lecture" },
+      { "id": "2", "subject": "CS24213", "time": "10:15 AM", "room": "LH-201", "type": "Lecture" },
+      { "id": "3", "subject": "CS24212", "time": "02:00 PM", "room": "Lab-3", "type": "Lab" }
+    ],
+    "stats": {
+      "studyMinutesToday": 0,
+      "streakDays": 0,
+      "attendanceOverall": 100,
+      "syllabusCompleted": 0
+    },
+    "quickNotes": []
+  },
+  "subjects": {
+    "CS24211": { "name": "Database Management System", "shortName": "DBMS", "code": "CS24211", "color": "#10B981", "credits": 3, "image": "/src/assets/subjects/dbms.png" },
+    "CS24213": { "name": "Design and Analysis of Algorithms", "shortName": "DAA", "code": "CS24213", "color": "#EF4444", "credits": 3, "image": "/src/assets/subjects/algo.png" },
+    "CS24215": { "name": "Operating System", "shortName": "OS", "code": "CS24215", "color": "#3B82F6", "credits": 3, "image": "/src/assets/subjects/os.png" },
+    "CS24301": { "name": "Compiler Design", "shortName": "Compiler", "code": "CS24301", "color": "#8B5CF6", "credits": 3, "image": "/src/assets/subjects/compiler.png" },
+    "CS24212": { "name": "DBMS Lab", "shortName": "DBMS Lab", "code": "CS24212", "color": "#059669", "credits": 1.5, "image": "/src/assets/subjects/lab.png" },
+    "CS24216": { "name": "Shell and Kernel Programming", "shortName": "Shell Lab", "code": "CS24216", "color": "#2563EB", "credits": 1.5, "image": "/src/assets/subjects/lab.png" },
+    "CS24302": { "name": "Compiler Design Lab", "shortName": "Compiler Lab", "code": "CS24302", "color": "#7C3AED", "credits": 1.5, "image": "/src/assets/subjects/lab.png" }
+  },
+  "syllabus": {
+    "CS24211": {
+      "Module I": {
+        "title": "Introduction to Database and ER Model",
+        "topics": [
+          { "id": "db1", "name": "Database System Applications", "status": "not-started" },
+          { "id": "db2", "name": "File System Vs Database Systems", "status": "not-started" },
+          { "id": "db3", "name": "View of Data & Database Languages", "status": "not-started" },
+          { "id": "db4", "name": "Transaction Management & Architecture", "status": "not-started" },
+          { "id": "db5", "name": "E-R Model & Constraints", "status": "not-started" },
+          { "id": "db6", "name": "Weak Entity Sets & Extended Features", "status": "not-started" },
+          { "id": "db7", "name": "Reduction to E-R Schemas", "status": "not-started" }
+        ]
+      },
+      "Module II": {
+        "title": "Relational Model",
+        "topics": [
+          { "id": "db8", "name": "Structure of Relational Database", "status": "not-started" },
+          { "id": "db9", "name": "Codd’s Rules", "status": "not-started" },
+          { "id": "db10", "name": "Relational Algebra Operations", "status": "not-started" },
+          { "id": "db11", "name": "SQL Queries & Set Operations", "status": "not-started" },
+          { "id": "db12", "name": "Aggregate Functions & Nested Sub Queries", "status": "not-started" },
+          { "id": "db13", "name": "Joins, Views & Triggers", "status": "not-started" }
+        ]
+      },
+      "Module III": {
+        "title": "Relational Database Design",
+        "topics": [
+          { "id": "db14", "name": "Design Issues & Anomalies", "status": "not-started" },
+          { "id": "db15", "name": "Normalization (1NF, 2NF, 3NF, BCNF)", "status": "not-started" },
+          { "id": "db16", "name": "Functional Dependency & Closure", "status": "not-started" },
+          { "id": "db17", "name": "Decomposition", "status": "not-started" },
+          { "id": "db18", "name": "Multivalued Dependencies (4NF, 5NF)", "status": "not-started" }
+        ]
+      },
+      "Module IV": {
+        "title": "Indexing, Hashing and Query Processing",
+        "topics": [
+          { "id": "db19", "name": "Ordered Indices, B+ Tree & B-Tree", "status": "not-started" },
+          { "id": "db20", "name": "Static and Dynamic Hashing", "status": "not-started" },
+          { "id": "db21", "name": "Query Cost & Selection Operation", "status": "not-started" }
+        ]
+      },
+      "Module V": {
+        "title": "Transaction and Concurrency Control",
+        "topics": [
+          { "id": "db22", "name": "Transaction Concepts & ACID Properties", "status": "not-started" },
+          { "id": "db23", "name": "Serializability & Recoverability", "status": "not-started" },
+          { "id": "db24", "name": "Lock Based Protocols", "status": "not-started" },
+          { "id": "db25", "name": "Deadlock Handling", "status": "not-started" }
+        ]
+      }
+    },
+    "CS24213": {
+      "Module I": {
+        "title": "Algorithms and Complexity",
+        "topics": [
+          { "id": "daa1", "name": "Role of Algorithms", "status": "not-started" },
+          { "id": "daa2", "name": "Insertion Sort Analysis", "status": "not-started" },
+          { "id": "daa3", "name": "Asymptotic Notations", "status": "not-started" },
+          { "id": "daa4", "name": "Recurrences (Substitution, Recursion-tree, Master)", "status": "not-started" }
+        ]
+      },
+      "Module II": {
+        "title": "Divide and Conquer",
+        "topics": [
+          { "id": "daa5", "name": "Binary Search & Merge Sort", "status": "not-started" },
+          { "id": "daa6", "name": "Quick Sort", "status": "not-started" },
+          { "id": "daa7", "name": "Selection in Linear Time", "status": "not-started" },
+          { "id": "daa8", "name": "Matrix Multiplication & Closest-Pair", "status": "not-started" }
+        ]
+      },
+      "Module III": {
+        "title": "Greedy Approach",
+        "topics": [
+          { "id": "daa9", "name": "Knapsack Problem", "status": "not-started" },
+          { "id": "daa10", "name": "Job Sequencing with Deadlines", "status": "not-started" },
+          { "id": "daa11", "name": "Minimum Cost Spanning Trees (Prim, Kruskal)", "status": "not-started" },
+          { "id": "daa12", "name": "Huffman Codes & Dijkstra’s Algorithm", "status": "not-started" }
+        ]
+      },
+      "Module IV": {
+        "title": "Dynamic Programming",
+        "topics": [
+          { "id": "daa13", "name": "0/1 Knapsack Problem", "status": "not-started" },
+          { "id": "daa14", "name": "Travelling Salesperson Problem", "status": "not-started" },
+          { "id": "daa15", "name": "Bellman-Ford & All-Pairs Shortest Paths", "status": "not-started" },
+          { "id": "daa16", "name": "LCS & Optimal BST", "status": "not-started" }
+        ]
+      },
+      "Module V": {
+        "title": "NP Completeness",
+        "topics": [
+          { "id": "daa17", "name": "P, NP, NP-Hard, NP-Complete", "status": "not-started" },
+          { "id": "daa18", "name": "Reductions & Proofs (Max-Clique, Vertex Cover)", "status": "not-started" },
+          { "id": "daa19", "name": "Approximation Algorithms", "status": "not-started" }
+        ]
+      }
+    },
+    "CS24215": {
+      "Module I": {
+        "title": "Introduction to Operating System",
+        "topics": [
+          { "id": "os1", "name": "OS Organization & Architecture", "status": "not-started" },
+          { "id": "os2", "name": "Resource Management & Security", "status": "not-started" },
+          { "id": "os3", "name": "Virtualization & Distributed Systems", "status": "not-started" },
+          { "id": "os4", "name": "System Calls & Services", "status": "not-started" }
+        ]
+      },
+      "Module II": {
+        "title": "Process Management",
+        "topics": [
+          { "id": "os5", "name": "Process Concept & Scheduling", "status": "not-started" },
+          { "id": "os6", "name": "Interprocess Communication", "status": "not-started" },
+          { "id": "os7", "name": "Threads & Multithreading Models", "status": "not-started" },
+          { "id": "os8", "name": "CPU Scheduling Algorithms", "status": "not-started" }
+        ]
+      },
+      "Module III": {
+        "title": "Process Synchronization and Deadlocks",
+        "topics": [
+          { "id": "os9", "name": "Critical Section Problem & Peterson Solution", "status": "not-started" },
+          { "id": "os10", "name": "Mutex Locks & Semaphores", "status": "not-started" },
+          { "id": "os11", "name": "Deadlock Characterization & Prevention", "status": "not-started" },
+          { "id": "os12", "name": "Deadlock Avoidance & Detection", "status": "not-started" }
+        ]
+      },
+      "Module IV": {
+        "title": "Main Memory",
+        "topics": [
+          { "id": "os13", "name": "Contiguous Allocation & Paging", "status": "not-started" },
+          { "id": "os14", "name": "Segmentation & Swapping", "status": "not-started" },
+          { "id": "os15", "name": "Virtual Memory & Demand Paging", "status": "not-started" },
+          { "id": "os16", "name": "Page Replacement Algorithms", "status": "not-started" }
+        ]
+      },
+      "Module V": {
+        "title": "Storage and File Management",
+        "topics": [
+          { "id": "os17", "name": "HDD Scheduling & RAID", "status": "not-started" },
+          { "id": "os18", "name": "File Concepts & Access Methods", "status": "not-started" },
+          { "id": "os19", "name": "Directory Structure & Protection", "status": "not-started" },
+          { "id": "os20", "name": "Allocation Methods & Free Space Mgmt", "status": "not-started" }
+        ]
+      }
+    },
+    "CS24301": {
+      "Module I": {
+        "title": "Introduction to Compilers",
+        "topics": [
+          { "id": "cd1", "name": "Structure of Compiler", "status": "not-started" },
+          { "id": "cd2", "name": "Lexical Analysis & Input Buffering", "status": "not-started" },
+          { "id": "cd3", "name": "Tokens & DFA Construction", "status": "not-started" }
+        ]
+      },
+      "Module II": {
+        "title": "Syntax Analysis",
+        "topics": [
+          { "id": "cd4", "name": "Grammar Transformations", "status": "not-started" },
+          { "id": "cd5", "name": "Top-Down Parsers (LL(1))", "status": "not-started" },
+          { "id": "cd6", "name": "Bottom-Up Parsers (LR)", "status": "not-started" },
+          { "id": "cd7", "name": "Error Detection", "status": "not-started" }
+        ]
+      },
+      "Module III": {
+        "title": "Semantic Analysis",
+        "topics": [
+          { "id": "cd8", "name": "SDD & SDTS", "status": "not-started" },
+          { "id": "cd9", "name": "Three Address Code", "status": "not-started" },
+          { "id": "cd10", "name": "Type Checking", "status": "not-started" }
+        ]
+      },
+      "Module IV": {
+        "title": "Evaluation and Translation",
+        "topics": [
+          { "id": "cd11", "name": "Boolean Expressions Translation", "status": "not-started" },
+          { "id": "cd12", "name": "Control Flow Constructs", "status": "not-started" },
+          { "id": "cd13", "name": "Function Call Translation & Activation Records", "status": "not-started" }
+        ]
+      },
+      "Module V": {
+        "title": "Optimization",
+        "topics": [
+          { "id": "cd14", "name": "Basic Blocks & Flow Graphs", "status": "not-started" },
+          { "id": "cd15", "name": "Local & Global Optimizations", "status": "not-started" },
+          { "id": "cd16", "name": "Loop Invariant Code Motion", "status": "not-started" },
+          { "id": "cd17", "name": "Dead Code Elimination", "status": "not-started" }
+        ]
+      }
+    }
+  },
+  "notes": {
+    "CS24211": [], "CS24213": [], "CS24215": [], "CS24301": [], "CS24212": [], "CS24216": [], "CS24302": []
+  },
+  "pyq": {
+    "CS24211": [
+      { "id": "pyq1", "question": "Explain the difference between logical and physical data independence using a suitable diagram.", "year": "Mid Sem SP2023", "marks": 2, "module": "Module I", "status": "not-started" },
+      { "id": "pyq2", "question": "Explain the term Abstraction with respect to a Database Management System.", "year": "End Sem MO/2024", "marks": 5, "module": "Module I", "status": "not-started" },
+      { "id": "pyq3", "question": "From the ER diagram shown below: (i) identify the composite attribute(s) (ii) identify a weak entity (iii) identify the cardinality of the WORKS_FOR relation (iv) identify all entities having total participation in their corresponding relation", "year": "End Sem MO/2024", "marks": 5, "module": "Module I", "status": "not-started" },
+      { "id": "pyq4", "question": "Explain the role of abstraction in designing the database for an enterprise. Enlist and discuss the levels of data abstraction.", "year": "Mid Sem MO/2024", "marks": 2, "module": "Module I", "status": "not-started" },
+      { "id": "pyq5", "question": "Explain the different ways in which different types of users interact with a database management system.", "year": "Mid Sem MO/2024", "marks": 2, "module": "Module I", "status": "not-started" },
+      { "id": "pyq6", "question": "With the help of a diagram elaborate the Database system structure.", "year": "End Sem MO/SP22", "marks": 5, "module": "Module I", "status": "not-started" },
+      { "id": "pyq7", "question": "Design and draw a complete E-R diagram for a UNIVERSITY database assuming suitable requirements. Indicate cardinality ratios.", "year": "Mid Sem SP2023", "marks": 5, "module": "Module I", "status": "not-started" },
+      { "id": "pyq8", "question": "What does the cardinality represent in an ER diagram?", "year": "Mid Sem MO/2024", "marks": 2, "module": "Module I", "status": "not-started" },
+      { "id": "pyq9", "question": "Design an ER diagram using generalization/specialization and aggregation to model a hospital scenario (Doctors, Nurses, Procedures).", "year": "Mid Sem MO/2024", "marks": 3, "module": "Module I", "status": "not-started" },
+      { "id": "pyq10", "question": "Design a database for an Airline (customers, flights, seats, schedules). Include ER diagram, relational schemas, and constraints.", "year": "End Sem SP/2024", "marks": 5, "module": "Module I", "status": "not-started" },
+      { "id": "pyq11", "question": "Give an example ternary relationship set. Justify why your design should not be replaced by binary relationship sets.", "year": "Mid Sem SP2024", "marks": 2, "module": "Module I", "status": "not-started" },
+      { "id": "pyq12", "question": "Illustrate the differences with example between weak & strong entity sets.", "year": "Mid Sem MO/2022", "marks": 5, "module": "Module I", "status": "not-started" },
+      { "id": "pyq13", "question": "What is a Trigger in SQL and how is it constructed? Discuss with an example.", "year": "Mid Sem SP2023", "marks": 3, "module": "Module II", "status": "not-started" },
+      { "id": "pyq14", "question": "Construct a View consisting of branches and their customer names for a given banking database.", "year": "Mid Sem SP2023", "marks": 2, "module": "Module II", "status": "not-started" },
+      { "id": "pyq15", "question": "Explain various Join operations with suitable relations.", "year": "Mid Sem SP2023", "marks": 3, "module": "Module II", "status": "not-started" },
+      { "id": "pyq16", "question": "Consider the following relational schema: employee (empno, name, office, age), book(isbn, title, authors, publisher), loan(empno, isbn, date). Write queries in relational algebra to find names of employees who have borrowed books published by McGraw-Hill.", "year": "Mid Sem SP2023", "marks": 5, "module": "Module II", "status": "not-started" },
+      { "id": "pyq17", "question": "Write an SQL query or Relational Algebra expression to: (i) Retrieve name of all faculties who teach 'Computer Organization' to 'John Smith'. (ii) Find how many female students mentored by female faculty combinations are there.", "year": "End Sem MO/2024", "marks": 5, "module": "Module II", "status": "not-started" },
+      { "id": "pyq18", "question": "Explain the advantage of using Join operations on a relation.", "year": "End Sem MO/2024", "marks": 5, "module": "Module II", "status": "not-started" },
+      { "id": "pyq19", "question": "Write SQL DDL statements to create corresponding tables (Employee, Department, Project) and suggest the integrity constraints.", "year": "Mid Sem MO/2024", "marks": 3, "module": "Module II", "status": "not-started" },
+      { "id": "pyq20", "question": "Consider the airline flight information. Write queries in Relational Algebra and SQL for finding certified employees and specific flight details.", "year": "End Sem SP/2023", "marks": 10, "module": "Module II", "status": "not-started" },
+      { "id": "pyq21", "question": "Explain Codd’s Rules.", "year": "End Sem MO/SP22", "marks": 2, "module": "Module II", "status": "not-started" },
+      { "id": "pyq22", "question": "Differentiate between Primary, Candidate and Super Key with suitable example.", "year": "Mid Sem SP2023", "marks": 2, "module": "Module III", "status": "not-started" },
+      { "id": "pyq23", "question": "Identify all Functional Dependencies present in the Relation shown in the table below.", "year": "End Sem MO/2024", "marks": 5, "module": "Module III", "status": "not-started" },
+      { "id": "pyq24", "question": "Given the Relation R(A,B,C,D,E) and FDs {AB →CD,D → E,A →C,B→D}, convert R into BCNF.", "year": "End Sem MO/2024", "marks": 5, "module": "Module III", "status": "not-started" },
+      { "id": "pyq25", "question": "Propose a relational schema which is not in the first normal form. Convert your schema to the first normal form. Then convert a schema to 2NF such that it is not in 3NF.", "year": "End Sem SP/2024", "marks": 5, "module": "Module III", "status": "not-started" },
+      { "id": "pyq26", "question": "Consider the following dependency graph and answer the following questions: (i) Write the closure set of FDs. (ii) What are the prime attributes? (iii) Decompose in 3NF.", "year": "End Sem SP/2023", "marks": 5, "module": "Module III", "status": "not-started" },
+      { "id": "pyq27", "question": "Differentiate between 3NF and BCNF.", "year": "End Sem MO/SP22", "marks": 3, "module": "Module III", "status": "not-started" },
+      { "id": "pyq28", "question": "Explain the working of Secondary Indices and its advantages when searching for a record in the database.", "year": "End Sem MO/2024", "marks": 5, "module": "Module IV", "status": "not-started" },
+      { "id": "pyq29", "question": "Create a B Tree having following elements: 5,3,21,9,13,22,7,10,11,14,8,16. Clearly show the steps involved in the insertion of each element.", "year": "End Sem MO/2024", "marks": 5, "module": "Module IV", "status": "not-started" },
+      { "id": "pyq30", "question": "There are two types of ordered indices: dense index and sparse index. When is it preferable to use a dense index rather than a sparse index?", "year": "End Sem SP/2024", "marks": 5, "module": "Module IV", "status": "not-started" },
+      { "id": "pyq31", "question": "Discuss the needs behind hashing in database management systems. What are the problems with static hashing?", "year": "End Sem SP/2024", "marks": 5, "module": "Module IV", "status": "not-started" },
+      { "id": "pyq32", "question": "Differentiate between B tree and B+ tree with example.", "year": "End Sem MO/SP22", "marks": 3, "module": "Module IV", "status": "not-started" },
+      { "id": "pyq33", "question": "What is the need of Lock-Based protocols? Explain the working of Strict two-phase locking protocol.", "year": "End Sem MO/2024", "marks": 5, "module": "Module V", "status": "not-started" },
+      { "id": "pyq34", "question": "List the ACID properties. Explain the usefulness of each.", "year": "End Sem SP/2024", "marks": 5, "module": "Module V", "status": "not-started" },
+      { "id": "pyq35", "question": "Explain the distinction between the terms serial schedule and serializable schedule.", "year": "End Sem SP/2024", "marks": 5, "module": "Module V", "status": "not-started" },
+      { "id": "pyq36", "question": "How do we recover from a deadlock in 2 phase locking? Write down the Thomas’ write rule.", "year": "End Sem SP/2023", "marks": 5, "module": "Module V", "status": "not-started" },
+      { "id": "pyq37", "question": "What is Deadlock? Elaborate with example.", "year": "End Sem MO/SP22", "marks": 5, "module": "Module V", "status": "not-started" }
+    ], "CS24213": [], "CS24215": [], "CS24301": []
+  },
+  "attendance": {
+    "CS24211": { "total": 0, "attended": 0, "history": [] },
+    "CS24213": { "total": 0, "attended": 0, "history": [] },
+    "CS24215": { "total": 0, "attended": 0, "history": [] },
+    "CS24301": { "total": 0, "attended": 0, "history": [] },
+    "CS24212": { "total": 0, "attended": 0, "history": [] },
+    "CS24216": { "total": 0, "attended": 0, "history": [] },
+    "CS24302": { "total": 0, "attended": 0, "history": [] }
+  },
+  "timetable": {
+    "Monday": [], "Tuesday": [], "Wednesday": [], "Thursday": [], "Friday": []
+  },
+  "tasks": [],
+  "projects": [],
+  "files": {
+    "CS24211": [], "CS24213": [], "CS24215": [], "CS24301": [], "CS24212": [], "CS24216": [], "CS24302": []
+  }
+}
