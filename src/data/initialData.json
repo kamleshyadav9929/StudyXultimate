@@ -8,10 +8,7 @@
   "settings": {
     "theme": "dark"
   },
-  "goals": [
-    { "id": "g1", "name": "End Semester Exams", "date": "2025-12-15T09:00:00.000Z", "type": "exam" },
-    { "id": "g2", "name": "Project Submission", "date": "2025-12-05T23:59:00.000Z", "type": "assignment" }
-  ],
+  "goals": [],
   "dashboard": {
     "todaySchedule": [
       { "id": "1", "subject": "CS24215", "time": "09:00 AM", "room": "LH-201", "type": "Lecture" },

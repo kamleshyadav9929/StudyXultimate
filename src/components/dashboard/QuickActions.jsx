@@ -17,19 +17,19 @@ const QuickActions = () => {
   ];
 
   return (
-    <div className="bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 p-6 rounded-2xl">
+    <div className="bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 p-4 md:p-6 rounded-2xl">
       <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">Quick Actions</h3>
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div className="grid grid-cols-3 md:grid-cols-4 gap-3 md:gap-4">
         {actions.map((action, index) => (
           <button 
             key={action.label}
             onClick={action.onClick}
-            className={`flex flex-col items-center justify-center p-4 bg-slate-50 dark:bg-slate-800/40 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all rounded-xl border border-slate-200 dark:border-slate-700/30 group hover:shadow-md ${index >= 8 ? 'hidden md:flex' : 'flex'}`}
+            className={`flex flex-col items-center justify-center p-2 md:p-4 bg-slate-50 dark:bg-slate-800/40 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all rounded-xl border border-slate-200 dark:border-slate-700/30 group hover:shadow-md ${index >= 8 ? 'hidden md:flex' : 'flex'}`}
           >
-            <div className={`p-3 rounded-xl ${action.color} text-white mb-3 shadow-lg shadow-black/10 group-hover:scale-110 transition-transform`}>
-              <action.icon size={22} />
+            <div className={`p-2 md:p-3 rounded-xl ${action.color} text-white mb-2 md:mb-3 shadow-lg shadow-black/10 group-hover:scale-110 transition-transform`}>
+              <action.icon size={20} className="md:w-[22px] md:h-[22px]" />
             </div>
-            <span className="text-sm font-medium text-slate-600 dark:text-slate-300">{action.label}</span>
+            <span className="text-xs md:text-sm font-medium text-slate-600 dark:text-slate-300 text-center leading-tight">{action.label}</span>
           </button>
         ))}
       </div>

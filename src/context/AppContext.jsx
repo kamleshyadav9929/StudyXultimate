@@ -24,6 +24,11 @@ export const AppProvider = ({ children }) => {
     if (!mergedData.habits) mergedData.habits = initialData.habits;
     if (!mergedData.userProfile.goal) mergedData.userProfile.goal = initialData.userProfile.goal;
 
+    // Filter out legacy initial goals if they exist in localStorage
+    if (mergedData.goals) {
+      mergedData.goals = mergedData.goals.filter(g => g.id !== 'g1' && g.id !== 'g2');
+    }
+
     // Deep merge PYQs to ensure new questions appear while keeping status of old ones
     if (initialData.pyq) {
       mergedData.pyq = { ...initialData.pyq }; // Start with new structure

@@ -44,8 +44,8 @@ const Dashboard = () => {
   }
 
   return (
-    <div className="space-y-8 pb-8">
-      <header className="relative overflow-hidden rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-8 shadow-sm">
+    <div className="space-y-4 md:space-y-8 pb-4 md:pb-8">
+      <header className="relative overflow-hidden rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-4 md:p-8 shadow-sm">
         <div className="relative z-10">
           <h1 className="text-3xl font-bold text-slate-900 dark:text-white mb-2">
             Welcome back, <span className="text-blue-600 dark:text-blue-400">{state.userProfile.name}</span> 👋
@@ -60,40 +60,40 @@ const Dashboard = () => {
       <ExamCountdown />
 
       {/* Stats Row */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <Link to="/schedule" className="bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 p-4 rounded-2xl flex items-center gap-4 hover:border-blue-500/50 transition-all hover:shadow-lg hover:shadow-blue-500/5 group">
-          <div className="p-3 bg-blue-500/10 rounded-xl text-blue-600 dark:text-blue-400 group-hover:bg-blue-500 group-hover:text-white transition-colors">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4">
+        <Link to="/schedule" className="bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 p-3 md:p-4 rounded-2xl flex items-center gap-3 md:gap-4 hover:border-blue-500/50 transition-all hover:shadow-lg hover:shadow-blue-500/5 group">
+          <div className="p-2 md:p-3 bg-blue-500/10 rounded-xl text-blue-600 dark:text-blue-400 group-hover:bg-blue-500 group-hover:text-white transition-colors">
             <Clock size={24} />
           </div>
           <div>
-            <p className="text-2xl font-bold text-slate-900 dark:text-white">{state.dashboard.stats.studyMinutesToday}m</p>
+            <p className="text-xl md:text-2xl font-bold text-slate-900 dark:text-white">{state.dashboard.stats.studyMinutesToday}m</p>
             <p className="text-xs text-slate-500 dark:text-slate-400 font-medium">Studied Today</p>
           </div>
         </Link>
-        <Link to="/schedule" className="bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 p-4 rounded-2xl flex items-center gap-4 hover:border-orange-500/50 transition-all hover:shadow-lg hover:shadow-orange-500/5 group">
-          <div className="p-3 bg-orange-500/10 rounded-xl text-orange-600 dark:text-orange-400 group-hover:bg-orange-500 group-hover:text-white transition-colors">
+        <Link to="/schedule" className="bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 p-3 md:p-4 rounded-2xl flex items-center gap-3 md:gap-4 hover:border-orange-500/50 transition-all hover:shadow-lg hover:shadow-orange-500/5 group">
+          <div className="p-2 md:p-3 bg-orange-500/10 rounded-xl text-orange-600 dark:text-orange-400 group-hover:bg-orange-500 group-hover:text-white transition-colors">
             <Flame size={24} />
           </div>
           <div>
-            <p className="text-2xl font-bold text-slate-900 dark:text-white">{state.dashboard.stats.streakDays}</p>
+            <p className="text-xl md:text-2xl font-bold text-slate-900 dark:text-white">{state.dashboard.stats.streakDays}</p>
             <p className="text-xs text-slate-500 dark:text-slate-400 font-medium">Day Streak</p>
           </div>
         </Link>
-        <Link to="/attendance" className="bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 p-4 rounded-2xl flex items-center gap-4 hover:border-emerald-500/50 transition-all hover:shadow-lg hover:shadow-emerald-500/5 group">
-          <div className="p-3 bg-emerald-500/10 rounded-xl text-emerald-600 dark:text-emerald-400 group-hover:bg-emerald-500 group-hover:text-white transition-colors">
+        <Link to="/attendance" className="bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 p-3 md:p-4 rounded-2xl flex items-center gap-3 md:gap-4 hover:border-emerald-500/50 transition-all hover:shadow-lg hover:shadow-emerald-500/5 group">
+          <div className="p-2 md:p-3 bg-emerald-500/10 rounded-xl text-emerald-600 dark:text-emerald-400 group-hover:bg-emerald-500 group-hover:text-white transition-colors">
             <Calendar size={24} />
           </div>
           <div>
-            <p className="text-2xl font-bold text-slate-900 dark:text-white">{state.dashboard.stats.attendanceOverall}%</p>
+            <p className="text-xl md:text-2xl font-bold text-slate-900 dark:text-white">{state.dashboard.stats.attendanceOverall}%</p>
             <p className="text-xs text-slate-500 dark:text-slate-400 font-medium">Avg Attendance</p>
           </div>
         </Link>
-        <Link to="/syllabus" className="bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 p-4 rounded-2xl flex items-center gap-4 hover:border-purple-500/50 transition-all hover:shadow-lg hover:shadow-purple-500/5 group">
-          <div className="p-3 bg-purple-500/10 rounded-xl text-purple-600 dark:text-purple-400 group-hover:bg-purple-500 group-hover:text-white transition-colors">
+        <Link to="/syllabus" className="bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 p-3 md:p-4 rounded-2xl flex items-center gap-3 md:gap-4 hover:border-purple-500/50 transition-all hover:shadow-lg hover:shadow-purple-500/5 group">
+          <div className="p-2 md:p-3 bg-purple-500/10 rounded-xl text-purple-600 dark:text-purple-400 group-hover:bg-purple-500 group-hover:text-white transition-colors">
             <BookOpen size={24} />
           </div>
           <div>
-            <p className="text-2xl font-bold text-slate-900 dark:text-white">{state.dashboard.stats.syllabusCompleted}%</p>
+            <p className="text-xl md:text-2xl font-bold text-slate-900 dark:text-white">{state.dashboard.stats.syllabusCompleted}%</p>
             <p className="text-xs text-slate-500 dark:text-slate-400 font-medium">Syllabus Done</p>
           </div>
         </Link>
@@ -104,7 +104,7 @@ const Dashboard = () => {
         <QuickActions />
 
         {/* Today's Schedule */}
-        <div className="bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 p-6 rounded-2xl">
+        <div className="bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 p-4 md:p-6 rounded-2xl">
           <div className="flex items-center justify-between mb-6">
             <div>
               <h3 className="text-lg font-bold text-slate-900 dark:text-white">Today's Schedule</h3>
