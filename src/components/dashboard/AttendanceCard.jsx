@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 
 const AttendanceCard = ({ attendance, subjects }) => {
   return (
-    <div className="bg-slate-900/50 border border-slate-800 p-6 rounded-2xl">
-      <h3 className="text-lg font-semibold text-white mb-4">Attendance</h3>
+    <div className="bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 p-6 rounded-2xl">
+      <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">Attendance</h3>
       <div className="grid grid-cols-2 gap-3">
         {Object.keys(attendance).map(subjectCode => {
           const { total, attended } = attendance[subjectCode];
@@ -13,10 +13,10 @@ const AttendanceCard = ({ attendance, subjects }) => {
           const isLow = percentage < 75;
 
           return (
-            <Link key={subjectCode} to="/attendance" className="p-3 bg-slate-800/30 rounded-xl border border-slate-800/50 hover:bg-slate-800/50 hover:border-slate-700 transition-all cursor-pointer group">
+            <Link key={subjectCode} to="/attendance" className="p-3 bg-slate-50 dark:bg-slate-800/30 rounded-xl border border-slate-200 dark:border-slate-800/50 hover:bg-slate-100 dark:hover:bg-slate-800/50 hover:border-slate-300 dark:hover:border-slate-700 transition-all cursor-pointer group">
               <div className="flex justify-between items-start mb-1">
-                <span className="text-xs font-bold text-slate-400 group-hover:text-white transition-colors">{subjects[subjectCode]?.shortName || subjectCode}</span>
-                <span className={`text-xs font-bold ${isLow ? 'text-red-400' : 'text-emerald-400'}`}>
+                <span className="text-xs font-bold text-slate-600 dark:text-slate-400 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">{subjects[subjectCode]?.shortName || subjectCode}</span>
+                <span className={`text-xs font-bold ${isLow ? 'text-red-500 dark:text-red-400' : 'text-emerald-600 dark:text-emerald-400'}`}>
                   {percentage}%
                 </span>
               </div>

@@ -26,16 +26,16 @@ const ProgressCard = ({ subjects, syllabus }) => {
   });
 
   return (
-    <div className="bg-slate-900/50 border border-slate-800 p-6 rounded-2xl">
-      <h3 className="text-lg font-semibold text-white mb-4">Syllabus Progress</h3>
+    <div className="bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 p-6 rounded-2xl">
+      <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">Syllabus Progress</h3>
       <div className="space-y-4">
         {data.map((item) => (
           <Link key={item.name} to={`/subject/${item.name}?tab=syllabus`} className="block space-y-2 group cursor-pointer">
             <div className="flex justify-between text-sm">
-              <span className="text-slate-300 font-medium group-hover:text-white transition-colors">{item.name}</span>
-              <span className="text-slate-400">{item.value}%</span>
+              <span className="text-slate-600 dark:text-slate-300 font-medium group-hover:text-slate-900 dark:group-hover:text-white transition-colors">{item.name}</span>
+              <span className="text-slate-500 dark:text-slate-400">{item.value}%</span>
             </div>
-            <div className="h-2 w-full bg-slate-800 rounded-full overflow-hidden">
+            <div className="h-2 w-full bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
               <div 
                 className="h-full rounded-full transition-all duration-500"
                 style={{ width: `${item.value}%`, backgroundColor: item.color }}

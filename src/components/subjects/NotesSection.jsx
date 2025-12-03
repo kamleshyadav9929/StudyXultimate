@@ -58,7 +58,7 @@ const NotesSection = ({ subjectCode, notes, onUpdate }) => {
             placeholder="Search notes..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full bg-slate-900 border border-slate-700 rounded-xl py-2 pl-10 pr-4 text-white focus:outline-none focus:border-blue-500 transition-colors"
+            className="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl py-2 pl-10 pr-4 text-slate-900 dark:text-white focus:outline-none focus:border-blue-500 transition-colors"
           />
         </div>
         <button
@@ -72,31 +72,31 @@ const NotesSection = ({ subjectCode, notes, onUpdate }) => {
 
       {/* Add Note Form */}
       {isAdding && (
-        <div className="bg-slate-900/50 border border-slate-700 p-6 rounded-2xl space-y-4 animate-in fade-in slide-in-from-top-4">
+        <div className="bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 p-6 rounded-2xl space-y-4 animate-in fade-in slide-in-from-top-4">
           <input
             type="text"
             placeholder="Note Title"
             value={newNote.title}
             onChange={(e) => setNewNote({ ...newNote, title: e.target.value })}
-            className="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-blue-500"
+            className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg px-4 py-2 text-slate-900 dark:text-white focus:outline-none focus:border-blue-500"
           />
           <div className="flex gap-2 mb-2">
             <button 
               onClick={() => setIsPreview(false)}
-              className={`px-3 py-1 rounded-lg text-sm ${!isPreview ? 'bg-blue-600 text-white' : 'bg-slate-800 text-slate-400'}`}
+              className={`px-3 py-1 rounded-lg text-sm ${!isPreview ? 'bg-blue-600 text-white' : 'bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400'}`}
             >
               Write
             </button>
             <button 
               onClick={() => setIsPreview(true)}
-              className={`px-3 py-1 rounded-lg text-sm ${isPreview ? 'bg-blue-600 text-white' : 'bg-slate-800 text-slate-400'}`}
+              className={`px-3 py-1 rounded-lg text-sm ${isPreview ? 'bg-blue-600 text-white' : 'bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400'}`}
             >
               Preview
             </button>
           </div>
           
           {isPreview ? (
-            <div className="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-2 text-white min-h-[150px] prose prose-invert prose-sm max-w-none overflow-y-auto">
+            <div className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg px-4 py-2 text-slate-900 dark:text-white min-h-[150px] prose dark:prose-invert prose-sm max-w-none overflow-y-auto">
               <ReactMarkdown 
                 remarkPlugins={[remarkGfm, remarkMath]} 
                 rehypePlugins={[rehypeKatex]}
@@ -110,7 +110,7 @@ const NotesSection = ({ subjectCode, notes, onUpdate }) => {
               value={newNote.content}
               onChange={(e) => setNewNote({ ...newNote, content: e.target.value })}
               rows={6}
-              className="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-blue-500 resize-none font-mono text-sm"
+              className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg px-4 py-2 text-slate-900 dark:text-white focus:outline-none focus:border-blue-500 resize-none font-mono text-sm"
             />
           )}
           <input
@@ -118,7 +118,7 @@ const NotesSection = ({ subjectCode, notes, onUpdate }) => {
             placeholder="Tags (comma separated)"
             value={newNote.tags}
             onChange={(e) => setNewNote({ ...newNote, tags: e.target.value })}
-            className="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-blue-500"
+            className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg px-4 py-2 text-slate-900 dark:text-white focus:outline-none focus:border-blue-500"
           />
           <div className="flex justify-end gap-3">
             <button
@@ -130,7 +130,7 @@ const NotesSection = ({ subjectCode, notes, onUpdate }) => {
             <button
               onClick={handleAddNote}
               disabled={!newNote.title.trim() || !newNote.content.trim()}
-              className="bg-blue-600 hover:bg-blue-500 disabled:bg-slate-700 disabled:text-slate-500 disabled:cursor-not-allowed text-white px-6 py-2 rounded-lg transition-colors font-medium"
+              className="bg-blue-600 hover:bg-blue-500 disabled:bg-slate-200 dark:disabled:bg-slate-700 disabled:text-slate-400 dark:disabled:text-slate-500 disabled:cursor-not-allowed text-white px-6 py-2 rounded-lg transition-colors font-medium"
             >
               Save Note
             </button>
@@ -142,9 +142,9 @@ const NotesSection = ({ subjectCode, notes, onUpdate }) => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredNotes.length > 0 ? (
           filteredNotes.map((note) => (
-            <div key={note.id} className="bg-slate-900/50 border border-slate-800 p-6 rounded-2xl group hover:border-slate-600 transition-colors">
+            <div key={note.id} className="bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 p-6 rounded-2xl group hover:border-slate-300 dark:hover:border-slate-600 transition-colors">
               <div className="flex justify-between items-start mb-3">
-                <h3 className="text-lg font-semibold text-white line-clamp-1">{note.title}</h3>
+                <h3 className="text-lg font-semibold text-slate-900 dark:text-white line-clamp-1">{note.title}</h3>
                 <button
                   onClick={() => handleDeleteNote(note.id)}
                   className="text-slate-500 hover:text-red-400 transition-colors opacity-0 group-hover:opacity-100"
@@ -152,7 +152,7 @@ const NotesSection = ({ subjectCode, notes, onUpdate }) => {
                   <Trash2 size={18} />
                 </button>
               </div>
-              <div className="text-slate-400 text-sm line-clamp-4 mb-4 prose prose-invert prose-sm max-w-none">
+              <div className="text-slate-600 dark:text-slate-400 text-sm line-clamp-4 mb-4 prose dark:prose-invert prose-sm max-w-none">
                 <ReactMarkdown 
                   remarkPlugins={[remarkGfm, remarkMath]} 
                   rehypePlugins={[rehypeKatex]}
@@ -164,7 +164,7 @@ const NotesSection = ({ subjectCode, notes, onUpdate }) => {
               <div className="flex items-center justify-between mt-auto">
                 <div className="flex flex-wrap gap-2">
                   {note.tags.map(tag => (
-                    <span key={tag} className="flex items-center gap-1 text-xs px-2 py-1 bg-slate-800 rounded-md text-blue-400">
+                    <span key={tag} className="flex items-center gap-1 text-xs px-2 py-1 bg-slate-100 dark:bg-slate-800 rounded-md text-blue-600 dark:text-blue-400">
                       <Tag size={10} /> {tag}
                     </span>
                   ))}
