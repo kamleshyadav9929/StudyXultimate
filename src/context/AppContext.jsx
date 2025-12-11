@@ -24,6 +24,21 @@ export const AppProvider = ({ children }) => {
     if (!mergedData.habits) mergedData.habits = initialData.habits;
     if (!mergedData.userProfile.goal) mergedData.userProfile.goal = initialData.userProfile.goal;
 
+    // Initialize Skills if missing
+    if (!mergedData.skills) {
+      mergedData.skills = [
+        { id: 's1', name: 'Python', category: 'Technical', level: 1, maxLevel: 5, progress: 0, icon: 'Code' },
+        { id: 's2', name: 'Communication', category: 'Soft Skills', level: 1, maxLevel: 5, progress: 0, icon: 'MessageSquare' },
+        { id: 's3', name: 'Problem Solving', category: 'Soft Skills', level: 1, maxLevel: 5, progress: 0, icon: 'Brain' },
+        { id: 's4', name: 'Data Structures', category: 'Technical', level: 1, maxLevel: 5, progress: 0, icon: 'Database' },
+      ];
+    }
+
+    // Initialize Journal if missing
+    if (!mergedData.journal) {
+      mergedData.journal = [];
+    }
+
     // Filter out legacy initial goals if they exist in localStorage
     if (mergedData.goals) {
       mergedData.goals = mergedData.goals.filter(g => g.id !== 'g1' && g.id !== 'g2');

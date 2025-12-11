@@ -8,13 +8,19 @@ import TimeManagementPage from './pages/TimeManagementPage';
 import FileOrganizerPage from './pages/FileOrganizerPage';
 import AttendancePage from './pages/AttendancePage';
 import SubjectsPage from './pages/SubjectsPage';
-import SyllabusPage from './pages/SyllabusPage';
-import PYQPage from './pages/PYQPage';
+
+
 import SettingsPage from './pages/SettingsPage';
 import ResourcesPage from './pages/ResourcesPage';
 import HabitTrackerPage from './pages/HabitTrackerPage';
 import GradesPage from './pages/GradesPage';
-import GoalsPage from './pages/GoalsPage';
+import TasksDeadlinesPage from './pages/TasksDeadlinesPage';
+import TimetablePage from './pages/TimetablePage';
+
+import SkillTreePage from './pages/SkillTreePage';
+
+import AIChatPage from './pages/AIChatPage';
+import JournalHistoryPage from './pages/JournalHistoryPage';
 
 function App() {
   return (
@@ -25,15 +31,19 @@ function App() {
             <Route index element={<Dashboard />} />
             <Route path="subjects" element={<SubjectsPage />} />
             <Route path="subject/:subjectCode" element={<SubjectPage />} />
-            <Route path="syllabus" element={<SyllabusPage />} />
-            <Route path="pyq" element={<PYQPage />} />
+            <Route path="syllabus" element={<Navigate to="/subjects" replace />} />
+            <Route path="pyq" element={<Navigate to="/subjects" replace />} />
             <Route path="schedule" element={<TimeManagementPage />} />
+            <Route path="timetable" element={<TimetablePage />} />
             <Route path="files" element={<FileOrganizerPage />} />
             <Route path="attendance" element={<AttendancePage />} />
             <Route path="resources" element={<ResourcesPage />} />
             <Route path="habits" element={<HabitTrackerPage />} />
             <Route path="grades" element={<GradesPage />} />
-            <Route path="goals" element={<GoalsPage />} />
+            <Route path="tasks-deadlines" element={<TasksDeadlinesPage />} />
+            <Route path="skills" element={<SkillTreePage />} />
+            <Route path="ai-assistant" element={<AIChatPage />} />
+            <Route path="journal-history" element={<JournalHistoryPage />} />
             <Route path="settings" element={<SettingsPage />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Route>

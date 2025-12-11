@@ -17,9 +17,13 @@ import {
   Briefcase,
   BarChart2,
   Target,
-  FileQuestion
+  FileQuestion,
+  Zap,
+  Calendar,
+  Timer
 } from 'lucide-react';
 import { clsx } from 'clsx';
+import AIChatWidget from '../ai/AIChatWidget';
 
 const SidebarItem = ({ to, icon: Icon, label, collapsed, onClick }) => (
   <NavLink
@@ -46,14 +50,15 @@ const MainLayout = () => {
 
   const navItems = [
     { to: "/", icon: LayoutDashboard, label: "Dashboard" },
+    { to: "/ai-assistant", icon: Zap, label: "StudyX AI" },
     { to: "/subjects", icon: BookOpen, label: "Subjects" },
-    { to: "/syllabus", icon: ListTodo, label: "Syllabus" },
-    { to: "/pyq", icon: FileQuestion, label: "PYQ Tracker" },
-    { to: "/schedule", icon: Clock, label: "Schedule" },
+    { to: "/schedule", icon: Timer, label: "Focus Timer" },
+    { to: "/timetable", icon: Calendar, label: "Timetable" },
     { to: "/attendance", icon: CheckSquare, label: "Attendance" },
-    { to: "/files", icon: FolderOpen, label: "File Organizer" }, // Modified label for Files
-    { to: "/grades", icon: Trophy, label: "Grades & Scores" }, // Added Grades item
-    { to: "/goals", icon: Target, label: "Goals & Deadlines" },
+    { to: "/files", icon: FolderOpen, label: "File Organizer" },
+    { to: "/grades", icon: Trophy, label: "Grades & Scores" },
+    { to: "/tasks-deadlines", icon: Target, label: "Tasks & Deadlines" },
+    { to: "/skills", icon: Zap, label: "Skill Tree" },
     { to: "/resources", icon: Link2, label: "Resources" },
     { to: "/habits", icon: Flame, label: "Habits" },
     { to: "/settings", icon: Settings, label: "Settings" },

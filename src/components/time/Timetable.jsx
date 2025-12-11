@@ -61,9 +61,9 @@ const Timetable = ({ timetable, onUpdate }) => {
   };
 
   return (
-    <div className="bg-slate-900/50 border border-slate-800 p-6 rounded-2xl overflow-hidden h-full flex flex-col">
+    <div className="bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 p-6 rounded-2xl overflow-hidden h-full flex flex-col">
       <div className="flex items-center justify-between mb-6">
-        <h3 className="text-lg font-semibold text-white">Weekly Timetable</h3>
+        <h3 className="text-lg font-semibold text-slate-900 dark:text-white">Weekly Timetable</h3>
         <button 
           onClick={() => setIsModalOpen(true)}
           className="p-2 bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors"
@@ -75,22 +75,22 @@ const Timetable = ({ timetable, onUpdate }) => {
       <div className="overflow-x-auto flex-1">
         <div className="min-w-[800px] grid grid-cols-5 gap-4 h-full">
           {days.map(day => (
-            <div key={day} className="space-y-3 bg-slate-800/30 p-3 rounded-xl">
-              <h4 className="text-sm font-bold text-slate-400 uppercase tracking-wider text-center mb-2">{day.slice(0, 3)}</h4>
+            <div key={day} className="space-y-3 bg-slate-50 dark:bg-slate-800/30 p-3 rounded-xl">
+              <h4 className="text-sm font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider text-center mb-2">{day.slice(0, 3)}</h4>
               <div className="space-y-3">
                 {timetable[day]?.length > 0 ? (
                   timetable[day].map((slot) => (
-                    <div key={slot.id} className="group relative bg-slate-800 p-3 rounded-xl border border-slate-700/50 hover:border-blue-500/50 transition-all">
+                    <div key={slot.id} className="group relative bg-white dark:bg-slate-800 p-3 rounded-xl border border-slate-200 dark:border-slate-700/50 hover:border-blue-500/50 transition-all shadow-sm dark:shadow-none">
                       <button 
                         onClick={() => handleDeleteClass(day, slot.id)}
-                        className="absolute top-1 right-1 p-1 text-slate-500 hover:text-red-500 opacity-0 group-hover:opacity-100 transition-opacity"
+                        className="absolute top-1 right-1 p-1 text-slate-400 dark:text-slate-500 hover:text-red-500 opacity-0 group-hover:opacity-100 transition-opacity"
                       >
                         <Trash2 size={14} />
                       </button>
-                      <p className="font-bold text-white text-sm truncate" title={state.subjects[slot.subject]?.name}>
+                      <p className="font-bold text-slate-900 dark:text-white text-sm truncate" title={state.subjects[slot.subject]?.name}>
                         {state.subjects[slot.subject]?.shortName || slot.subject}
                       </p>
-                      <p className="text-xs text-slate-400 mt-1">{slot.time}</p>
+                      <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">{slot.time}</p>
                       <div className="flex justify-between items-center mt-1">
                         <p className="text-[10px] text-slate-500">{slot.room}</p>
                         <span className={`text-[10px] px-1.5 py-0.5 rounded ${
@@ -104,8 +104,8 @@ const Timetable = ({ timetable, onUpdate }) => {
                     </div>
                   ))
                 ) : (
-                  <div className="h-24 rounded-xl border border-dashed border-slate-800 flex items-center justify-center opacity-50">
-                    <span className="text-xs text-slate-600">Free</span>
+                  <div className="h-24 rounded-xl border border-dashed border-slate-300 dark:border-slate-800 flex items-center justify-center opacity-50">
+                    <span className="text-xs text-slate-400 dark:text-slate-600">Free</span>
                   </div>
                 )}
               </div>
@@ -117,10 +117,10 @@ const Timetable = ({ timetable, onUpdate }) => {
       {/* Add Class Modal */}
       {isModalOpen && (
         <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-          <div className="bg-slate-900 border border-slate-800 w-full max-w-md rounded-2xl p-6 shadow-2xl">
+          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 w-full max-w-md rounded-2xl p-6 shadow-2xl">
             <div className="flex justify-between items-center mb-6">
-              <h2 className="text-xl font-bold text-white">Add Class</h2>
-              <button onClick={() => setIsModalOpen(false)} className="text-slate-400 hover:text-white">
+              <h2 className="text-xl font-bold text-slate-900 dark:text-white">Add Class</h2>
+              <button onClick={() => setIsModalOpen(false)} className="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">
                 <X size={24} />
               </button>
             </div>
@@ -137,7 +137,7 @@ const Timetable = ({ timetable, onUpdate }) => {
                       className={`px-3 py-1.5 rounded-lg text-sm whitespace-nowrap transition-colors ${
                         selectedDay === day 
                           ? 'bg-blue-600 text-white' 
-                          : 'bg-slate-800 text-slate-400 hover:bg-slate-700'
+                          : 'bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700'
                       }`}
                     >
                       {day.slice(0, 3)}
@@ -164,7 +164,7 @@ const Timetable = ({ timetable, onUpdate }) => {
                     required
                     value={newClass.startTime}
                     onChange={e => setNewClass({...newClass, startTime: e.target.value})}
-                    className="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-blue-500"
+                    className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg px-4 py-2 text-slate-900 dark:text-white focus:outline-none focus:border-blue-500"
                   />
                 </div>
                 <div>
@@ -174,7 +174,7 @@ const Timetable = ({ timetable, onUpdate }) => {
                     required
                     value={newClass.endTime}
                     onChange={e => setNewClass({...newClass, endTime: e.target.value})}
-                    className="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-blue-500"
+                    className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg px-4 py-2 text-slate-900 dark:text-white focus:outline-none focus:border-blue-500"
                   />
                 </div>
               </div>
@@ -186,7 +186,7 @@ const Timetable = ({ timetable, onUpdate }) => {
                     type="text" 
                     value={newClass.room}
                     onChange={e => setNewClass({...newClass, room: e.target.value})}
-                    className="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-blue-500"
+                    className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg px-4 py-2 text-slate-900 dark:text-white focus:outline-none focus:border-blue-500"
                     placeholder="e.g. LH-101"
                   />
                 </div>

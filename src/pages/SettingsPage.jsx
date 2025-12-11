@@ -1,12 +1,56 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useApp } from '../context/AppContext';
 import { DataManager } from '../services/DataManager';
-import { Save, Download, Upload, RotateCcw, User, Moon, Sun, Monitor } from 'lucide-react';
+import AIService from '../services/AIService';
+import { Save, Download, Upload, RotateCcw, User, Moon, Sun, Monitor, Sparkles, Key, CheckCircle, XCircle, ExternalLink } from 'lucide-react';
 
 const SettingsPage = () => {
   const { state, updateState } = useApp();
   const [importError, setImportError] = useState(null);
   const [successMsg, setSuccessMsg] = useState(null);
+  const [apiKey, setApiKey] = useState('');
+  const [isApiKeyVisible, setIsApiKeyVisible] = useState(false);
+  const [isTesting, setIsTesting] = useState(false);
+  const [testResult, setTestResult] = useState(null);
+
+  // Load API key on mount
+  useEffect(() => {
+    setApiKey(localStorage.getItem('OPENROUTER_API_KEY') || '');
+  }, []);
+
+  const handleSaveApiKey = () => {
+    AIService.setApiKey(apiKey);
+    showSuccess('API key saved successfully!');
+    setTestResult(null);
+  };
+
+  const handleRemoveApiKey = () => {
+    setApiKey('');
+    localStorage.removeItem('OPENROUTER_API_KEY');
+    showSuccess('API key removed.');
+    setTestResult(null);
+  };
+
+  const handleTestApiKey = async () => {
+    if (!apiKey) return;
+    setIsTesting(true);
+    setTestResult(null);
+    
+    // Temporarily save the key for testing
+    localStorage.setItem('OPENROUTER_API_KEY', apiKey);
+    
+    try {
+      const response = await AIService.chat('Hello, please respond with "API working!" if you receive this.');
+      if (response.isError) {
+        setTestResult({ success: false, message: response.text });
+      } else {
+        setTestResult({ success: true, message: 'API key is valid and working!' });
+      }
+    } catch (err) {
+      setTestResult({ success: false, message: err.message });
+    }
+    setIsTesting(false);
+  };
 
   const handleExport = () => {
     const dataStr = JSON.stringify(state, null, 2);
@@ -123,6 +167,117 @@ const SettingsPage = () => {
                   <RotateCcw size={16} />
                   Reset App
                 </button>
+              </div>
+            </div>
+          </section>
+
+          {/* AI Configuration */}
+          <section className="bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 p-6 rounded-2xl">
+            <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-6 flex items-center gap-2">
+              <Sparkles className="text-purple-400" />
+              AI Configuration
+            </h3>
+            
+            <div className="space-y-4">
+              <div className="p-4 bg-gradient-to-r from-blue-500/5 to-purple-500/5 rounded-xl border border-blue-500/20">
+                <div className="flex items-start justify-between mb-3">
+                  <div>
+                    <h4 className="font-medium text-slate-900 dark:text-white flex items-center gap-2">
+                      <Key size={16} className="text-blue-500" />
+                      OpenRouter API Key
+                    </h4>
+                    <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
+                      Power up your AI with Gemini 2.0 Flash via OpenRouter.
+                    </p>
+                  </div>
+                  <span className={`px-2 py-1 rounded-full text-xs font-medium ${apiKey ? 'bg-green-500/10 text-green-500' : 'bg-yellow-500/10 text-yellow-500'}`}>
+                    {apiKey ? '✓ Configured' : 'Not Set'}
+                  </span>
+                </div>
+                
+                <div className="space-y-3">
+                  <div className="flex gap-2">
+                    <input
+                      type={isApiKeyVisible ? "text" : "password"}
+                      value={apiKey}
+                      onChange={(e) => setApiKey(e.target.value)}
+                      placeholder="Enter your OpenRouter API key..."
+                      className="flex-1 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg px-4 py-2 text-slate-900 dark:text-white text-sm focus:outline-none focus:border-blue-500 transition-colors"
+                    />
+                    <button
+                      onClick={() => setIsApiKeyVisible(!isApiKeyVisible)}
+                      className="px-3 py-2 bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 rounded-lg text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors"
+                    >
+                      {isApiKeyVisible ? '🙈' : '👁️'}
+                    </button>
+                  </div>
+                  
+                  <div className="flex gap-2">
+                    <button
+                      onClick={handleSaveApiKey}
+                      disabled={!apiKey}
+                      className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-500 disabled:opacity-50 disabled:cursor-not-allowed text-white rounded-lg transition-colors text-sm font-medium"
+                    >
+                      <Save size={14} />
+                      Save Key
+                    </button>
+                    <button
+                      onClick={handleTestApiKey}
+                      disabled={!apiKey || isTesting}
+                      className="flex items-center gap-2 px-4 py-2 bg-purple-600 hover:bg-purple-500 disabled:opacity-50 disabled:cursor-not-allowed text-white rounded-lg transition-colors text-sm font-medium"
+                    >
+                      {isTesting ? (
+                        <>
+                          <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                          Testing...
+                        </>
+                      ) : (
+                        <>
+                          <Sparkles size={14} />
+                          Test Key
+                        </>
+                      )}
+                    </button>
+                    {apiKey && (
+                      <button
+                        onClick={handleRemoveApiKey}
+                        className="px-4 py-2 bg-red-500/10 hover:bg-red-500/20 text-red-400 border border-red-500/20 rounded-lg transition-colors text-sm font-medium"
+                      >
+                        Remove
+                      </button>
+                    )}
+                  </div>
+
+                  {testResult && (
+                    <div className={`flex items-center gap-2 p-3 rounded-lg ${testResult.success ? 'bg-green-500/10 text-green-500' : 'bg-red-500/10 text-red-400'}`}>
+                      {testResult.success ? <CheckCircle size={16} /> : <XCircle size={16} />}
+                      <span className="text-sm">{testResult.message}</span>
+                    </div>
+                  )}
+                </div>
+
+                <div className="mt-4 pt-4 border-t border-slate-200 dark:border-slate-700">
+                  <a 
+                    href="https://openrouter.ai/keys" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-sm text-blue-500 hover:text-blue-400 flex items-center gap-1"
+                  >
+                    <ExternalLink size={14} />
+                    Get your API key from OpenRouter
+                  </a>
+                </div>
+              </div>
+
+              <div className="p-4 bg-slate-50 dark:bg-slate-800/50 rounded-xl border border-slate-200 dark:border-slate-700/50">
+                <h4 className="font-medium text-slate-900 dark:text-white mb-2">🤖 AI Features</h4>
+                <ul className="text-sm text-slate-500 dark:text-slate-400 space-y-1">
+                  <li>• Answer any academic questions about your subjects</li>
+                  <li>• Generate study notes and explanations</li>
+                  <li>• Create practice quizzes for topics</li>
+                  <li>• Provide personalized study tips based on your data</li>
+                  <li>• Track attendance, tasks, and syllabus progress</li>
+                </ul>
               </div>
             </div>
           </section>

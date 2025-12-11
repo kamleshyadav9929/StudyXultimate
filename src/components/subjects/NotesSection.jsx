@@ -1,17 +1,20 @@
 import React, { useState } from 'react';
-import { Search, Plus, FileText, Trash2, Tag, Calendar } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Search, Plus, FileText, Trash2, Tag, Calendar, X, Eye, Edit3 } from 'lucide-react';
 import { v4 as uuidv4 } from 'uuid';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypeKatex from 'rehype-katex';
 import remarkMath from 'remark-math';
-import 'katex/dist/katex.min.css'; // Ensure you have this CSS or add it via CDN in index.html if needed
+import { clsx } from 'clsx';
+import 'katex/dist/katex.min.css';
 
-const NotesSection = ({ subjectCode, notes, onUpdate }) => {
+const NotesSection = ({ subjectCode, notes, onUpdate, subjectColor = '#3b82f6' }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [isAdding, setIsAdding] = useState(false);
   const [newNote, setNewNote] = useState({ title: '', content: '', tags: '' });
   const [isPreview, setIsPreview] = useState(false);
+  const [expandedNote, setExpandedNote] = useState(null);
 
   const filteredNotes = notes.filter(note => 
     note.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -45,6 +48,17 @@ const NotesSection = ({ subjectCode, notes, onUpdate }) => {
 
   const handleDeleteNote = (noteId) => {
     onUpdate(notes.filter(n => n.id !== noteId));
+    if (expandedNote === noteId) setExpandedNote(null);
+  };
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1, transition: { staggerChildren: 0.05 } }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20, scale: 0.95 },
+    visible: { opacity: 1, y: 0, scale: 1 }
   };
 
   return (
@@ -52,137 +66,219 @@ const NotesSection = ({ subjectCode, notes, onUpdate }) => {
       {/* Header & Actions */}
       <div className="flex flex-col sm:flex-row gap-4 justify-between items-start sm:items-center">
         <div className="relative flex-1 w-full sm:max-w-md">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={20} />
+          <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
           <input
             type="text"
             placeholder="Search notes..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl py-2 pl-10 pr-4 text-slate-900 dark:text-white focus:outline-none focus:border-blue-500 transition-colors"
+            className="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl py-3 pl-11 pr-4 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all"
           />
         </div>
-        <button
+        <motion.button
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
           onClick={() => setIsAdding(true)}
-          className="flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded-xl transition-colors font-medium"
+          className="flex items-center gap-2 text-white px-5 py-3 rounded-xl transition-all font-medium shadow-lg hover:shadow-xl"
+          style={{ backgroundColor: subjectColor }}
         >
           <Plus size={20} />
           Add Note
-        </button>
+        </motion.button>
       </div>
 
-      {/* Add Note Form */}
-      {isAdding && (
-        <div className="bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 p-6 rounded-2xl space-y-4 animate-in fade-in slide-in-from-top-4">
-          <input
-            type="text"
-            placeholder="Note Title"
-            value={newNote.title}
-            onChange={(e) => setNewNote({ ...newNote, title: e.target.value })}
-            className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg px-4 py-2 text-slate-900 dark:text-white focus:outline-none focus:border-blue-500"
-          />
-          <div className="flex gap-2 mb-2">
-            <button 
-              onClick={() => setIsPreview(false)}
-              className={`px-3 py-1 rounded-lg text-sm ${!isPreview ? 'bg-blue-600 text-white' : 'bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400'}`}
-            >
-              Write
-            </button>
-            <button 
-              onClick={() => setIsPreview(true)}
-              className={`px-3 py-1 rounded-lg text-sm ${isPreview ? 'bg-blue-600 text-white' : 'bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400'}`}
-            >
-              Preview
-            </button>
-          </div>
-          
-          {isPreview ? (
-            <div className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg px-4 py-2 text-slate-900 dark:text-white min-h-[150px] prose dark:prose-invert prose-sm max-w-none overflow-y-auto">
-              <ReactMarkdown 
-                remarkPlugins={[remarkGfm, remarkMath]} 
-                rehypePlugins={[rehypeKatex]}
+      {/* Add Note Modal */}
+      <AnimatePresence>
+        {isAdding && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 p-6 rounded-2xl space-y-4 shadow-xl"
+          >
+            <div className="flex items-center justify-between mb-2">
+              <h3 className="text-lg font-bold text-slate-900 dark:text-white">New Note</h3>
+              <button
+                onClick={() => setIsAdding(false)}
+                className="p-2 text-slate-400 hover:text-slate-600 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors"
               >
-                {newNote.content || '*No content*'}
-              </ReactMarkdown>
+                <X size={18} />
+              </button>
             </div>
-          ) : (
-            <textarea
-              placeholder="Write your note here... (Supports Markdown & LaTeX Math)"
-              value={newNote.content}
-              onChange={(e) => setNewNote({ ...newNote, content: e.target.value })}
-              rows={6}
-              className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg px-4 py-2 text-slate-900 dark:text-white focus:outline-none focus:border-blue-500 resize-none font-mono text-sm"
+            
+            <input
+              type="text"
+              placeholder="Note Title"
+              value={newNote.title}
+              onChange={(e) => setNewNote({ ...newNote, title: e.target.value })}
+              className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 text-lg font-medium"
             />
-          )}
-          <input
-            type="text"
-            placeholder="Tags (comma separated)"
-            value={newNote.tags}
-            onChange={(e) => setNewNote({ ...newNote, tags: e.target.value })}
-            className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg px-4 py-2 text-slate-900 dark:text-white focus:outline-none focus:border-blue-500"
-          />
-          <div className="flex justify-end gap-3">
-            <button
-              onClick={() => setIsAdding(false)}
-              className="px-4 py-2 text-slate-400 hover:text-white transition-colors"
-            >
-              Cancel
-            </button>
-            <button
-              onClick={handleAddNote}
-              disabled={!newNote.title.trim() || !newNote.content.trim()}
-              className="bg-blue-600 hover:bg-blue-500 disabled:bg-slate-200 dark:disabled:bg-slate-700 disabled:text-slate-400 dark:disabled:text-slate-500 disabled:cursor-not-allowed text-white px-6 py-2 rounded-lg transition-colors font-medium"
-            >
-              Save Note
-            </button>
-          </div>
-        </div>
-      )}
-
-      {/* Notes Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {filteredNotes.length > 0 ? (
-          filteredNotes.map((note) => (
-            <div key={note.id} className="bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 p-6 rounded-2xl group hover:border-slate-300 dark:hover:border-slate-600 transition-colors">
-              <div className="flex justify-between items-start mb-3">
-                <h3 className="text-lg font-semibold text-slate-900 dark:text-white line-clamp-1">{note.title}</h3>
-                <button
-                  onClick={() => handleDeleteNote(note.id)}
-                  className="text-slate-500 hover:text-red-400 transition-colors opacity-0 group-hover:opacity-100"
-                >
-                  <Trash2 size={18} />
-                </button>
-              </div>
-              <div className="text-slate-600 dark:text-slate-400 text-sm line-clamp-4 mb-4 prose dark:prose-invert prose-sm max-w-none">
+            
+            {/* Write/Preview Toggle */}
+            <div className="flex gap-1 p-1 bg-slate-100 dark:bg-slate-800 rounded-lg w-fit">
+              <button 
+                onClick={() => setIsPreview(false)}
+                className={clsx(
+                  "flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium transition-all",
+                  !isPreview ? "bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-sm" : "text-slate-500"
+                )}
+              >
+                <Edit3 size={14} /> Write
+              </button>
+              <button 
+                onClick={() => setIsPreview(true)}
+                className={clsx(
+                  "flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium transition-all",
+                  isPreview ? "bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-sm" : "text-slate-500"
+                )}
+              >
+                <Eye size={14} /> Preview
+              </button>
+            </div>
+            
+            {isPreview ? (
+              <div className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 text-slate-900 dark:text-white min-h-[200px] prose dark:prose-invert prose-sm max-w-none overflow-y-auto">
                 <ReactMarkdown 
                   remarkPlugins={[remarkGfm, remarkMath]} 
                   rehypePlugins={[rehypeKatex]}
                 >
-                  {note.content}
+                  {newNote.content || '*Start writing to see preview...*'}
                 </ReactMarkdown>
               </div>
+            ) : (
+              <textarea
+                placeholder="Write your note here... (Supports Markdown & LaTeX Math)"
+                value={newNote.content}
+                onChange={(e) => setNewNote({ ...newNote, content: e.target.value })}
+                rows={8}
+                className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 resize-none font-mono text-sm"
+              />
+            )}
+            
+            <input
+              type="text"
+              placeholder="Tags (comma separated)"
+              value={newNote.tags}
+              onChange={(e) => setNewNote({ ...newNote, tags: e.target.value })}
+              className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50"
+            />
+            
+            <div className="flex justify-end gap-3 pt-2">
+              <button
+                onClick={() => setIsAdding(false)}
+                className="px-5 py-2.5 text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors font-medium rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800"
+              >
+                Cancel
+              </button>
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                onClick={handleAddNote}
+                disabled={!newNote.title.trim() || !newNote.content.trim()}
+                className="text-white px-6 py-2.5 rounded-xl transition-all font-medium disabled:opacity-50 disabled:cursor-not-allowed shadow-lg"
+                style={{ backgroundColor: subjectColor }}
+              >
+                Save Note
+              </motion.button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Notes Grid */}
+      <motion.div 
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
+      >
+        {filteredNotes.length > 0 ? (
+          filteredNotes.map((note) => (
+            <motion.div 
+              key={note.id} 
+              variants={itemVariants}
+              whileHover={{ y: -4 }}
+              className="group bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden hover:shadow-xl hover:shadow-black/5 dark:hover:shadow-black/20 transition-all"
+            >
+              {/* Colored Top Border */}
+              <div className="h-1" style={{ backgroundColor: subjectColor }} />
               
-              <div className="flex items-center justify-between mt-auto">
-                <div className="flex flex-wrap gap-2">
-                  {note.tags.map(tag => (
-                    <span key={tag} className="flex items-center gap-1 text-xs px-2 py-1 bg-slate-100 dark:bg-slate-800 rounded-md text-blue-600 dark:text-blue-400">
-                      <Tag size={10} /> {tag}
-                    </span>
-                  ))}
+              <div className="p-5">
+                <div className="flex justify-between items-start mb-3">
+                  <h3 className="text-lg font-bold text-slate-900 dark:text-white line-clamp-1 flex-1">{note.title}</h3>
+                  <motion.button
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                    onClick={() => handleDeleteNote(note.id)}
+                    className="ml-2 p-2 text-slate-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-all opacity-0 group-hover:opacity-100"
+                  >
+                    <Trash2 size={16} />
+                  </motion.button>
                 </div>
-                <div className="flex items-center gap-1 text-xs text-slate-500">
-                  <Calendar size={12} />
-                  {note.date}
+                
+                <div className="text-slate-600 dark:text-slate-400 text-sm line-clamp-4 mb-4 prose dark:prose-invert prose-sm max-w-none">
+                  <ReactMarkdown 
+                    remarkPlugins={[remarkGfm, remarkMath]} 
+                    rehypePlugins={[rehypeKatex]}
+                  >
+                    {note.content}
+                  </ReactMarkdown>
+                </div>
+                
+                <div className="flex items-center justify-between pt-3 border-t border-slate-100 dark:border-slate-800">
+                  <div className="flex flex-wrap gap-1.5">
+                    {note.tags.slice(0, 3).map(tag => (
+                      <span 
+                        key={tag} 
+                        className="flex items-center gap-1 text-[10px] font-medium px-2 py-1 rounded-full"
+                        style={{ 
+                          backgroundColor: `${subjectColor}15`,
+                          color: subjectColor 
+                        }}
+                      >
+                        <Tag size={10} /> {tag}
+                      </span>
+                    ))}
+                    {note.tags.length > 3 && (
+                      <span className="text-[10px] text-slate-400">+{note.tags.length - 3}</span>
+                    )}
+                  </div>
+                  <div className="flex items-center gap-1 text-[10px] text-slate-400">
+                    <Calendar size={10} />
+                    {note.date}
+                  </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))
         ) : (
-          <div className="col-span-full text-center py-12 text-slate-500">
-            <FileText size={48} className="mx-auto mb-4 opacity-20" />
-            <p>No notes found. Create one to get started!</p>
-          </div>
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="col-span-full text-center py-16"
+          >
+            <motion.div
+              animate={{ y: [0, -8, 0] }}
+              transition={{ duration: 2, repeat: Infinity }}
+              className="w-20 h-20 mx-auto rounded-2xl flex items-center justify-center mb-4"
+              style={{ backgroundColor: `${subjectColor}15` }}
+            >
+              <FileText size={36} style={{ color: subjectColor }} />
+            </motion.div>
+            <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2">No Notes Yet</h3>
+            <p className="text-sm text-slate-500 mb-4">Create your first note to get started!</p>
+            <motion.button
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              onClick={() => setIsAdding(true)}
+              className="inline-flex items-center gap-2 text-white px-5 py-2.5 rounded-xl font-medium"
+              style={{ backgroundColor: subjectColor }}
+            >
+              <Plus size={18} /> Add Note
+            </motion.button>
+          </motion.div>
         )}
-      </div>
+      </motion.div>
     </div>
   );
 };
